@@ -9,7 +9,7 @@ const db = require('./config/db');
 const methodOverride = require('method-override');
 const http = require('http')
 const hostname = 'localhost';
-const port = process.env.PORT || 3000;
+const port = server.listen(process.env.PORT || 3000);
 
 // Create HTTP Server (Not neccessary)
 const server = http.createServer((req, res) => {
