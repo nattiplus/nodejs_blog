@@ -1,0 +1,82 @@
+<div class="mt-4">
+    <div>
+      <h1>Bài Viết Của Tôi</h1>
+        <a href="/me/trash/posts"><button type="button" class="btn btn-danger">Thùng Rác ({{deletedPost}})</button></a>
+    </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Index</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Time Create</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      {{#each posts}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.title}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.createdAt}}</td>
+        <td>        
+        <a href="/posts/{{_id}}/edit"><button type="button" class="btn btn-success">Edit</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-delete-post" data-bs-id="{{_id}}">Delete</button></a>
+        </td>
+    </tr>
+    {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Bạn Chưa Đăng Bài Viết Nào! 
+          <a href="/posts/create"><button type="button" class="btn btn-success">Đăng Bài Viết</button></a>
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+</div>
+
+{{!-- Delete Modal --}}
+<div class="modal" tabindex="-1" id="btn-delete-post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa Bài Viết</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn Có Chắc Chắn Muốn Xóa Bài Viết Không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Hidden form delete --}}
+    <form method="POST" id="delete-form-hidden"></form>
+
+{{!-- Get Id from Event Delete --}}
+<script>
+  var id;
+  var deleteform = document.forms['delete-form-hidden']
+  var delete_event = document.getElementById('btn-delete-post')
+  delete_event.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  id = button.getAttribute('data-bs-id')
+})
+
+  var buttonDeletePost = document.getElementById('btn-delete-post')
+  buttonDeletePost.onclick = function () {
+    deleteform.action = '/posts/' + id + '?_method=DELETE'
+    deleteform.submit()
+  }
+</script>

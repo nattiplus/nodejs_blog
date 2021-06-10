@@ -1,0 +1,25 @@
+<div class="mt-4">
+    <form method="POST" action="/posts/{{posts._id}}?_method=PUT">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" value="{{posts.title}}" id="title" name = "title">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" value="{{posts.description}}" id="description" name = "description">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="text" class="form-control" value="{{posts.image}}" id="image" name = "image">
+        </div>
+
+        <div class="mb-3">
+            <label for="videoID" class="form-label">VideoID</label>
+            <input type="text" class="form-control" value="{{posts.videoID}}" id="videoID" name = "videoID">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
