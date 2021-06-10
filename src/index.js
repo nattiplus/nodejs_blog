@@ -9,7 +9,7 @@ const db = require('./config/db');
 const methodOverride = require('method-override');
 const http = require('http')
 const hostname = 'localhost';
-const port = server.listen(process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
 
 // Create HTTP Server (Not neccessary)
 const server = http.createServer((req, res) => {
@@ -48,6 +48,6 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 // Route init
 route(app);
 
-app.listen(port, hostname, () => {
+app.listen(server.listen(port), hostname, () => {
     console.log(`App listening at http://${hostname}:${port}`);
 });
